@@ -35,21 +35,27 @@ function List() {
     return (
         <div>
             <h2>
-                <ScrollRotate>
-                <span>NFL Football Teams!</span>
-            </ScrollRotate>
+                <ScrollRotate method={"perc"} loops={5}>
+                    <span>NFL Football Teams!</span>
+                </ScrollRotate>
             </h2>
-            <GridContainer>
+            <GridContainer style={{ display: 'flex', flexDirection: 'column' }}>
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
                     teams.map((team, index) => (
-                        <div key={index} className="team-card">
-                            <ScrollRotate>
-                                <img src={team.logo} alt={team.name} />
+                        <div key={index} className="team-card" style={{ marginBottom: '20px' }}>
+                            <ScrollRotate animationDuration={0.5}>
+                                <img src={team.logo} alt={team.name} style={{ maxWidth: '100px' }} />
                             </ScrollRotate>
-                            <h3>{team.name}</h3>
-                            <p>Location: {team.location}</p>
+
+                            <ScrollRotate throttle={0.1}>
+                                <h3>{team.name}</h3>
+                            </ScrollRotate>
+
+                            <ScrollRotate from={90} to={180}>
+                                <p>Location: {team.location}</p>
+                            </ScrollRotate>
                         </div>
                     ))
                 )}
@@ -57,4 +63,5 @@ function List() {
         </div>
     );
 }
+
 export default List;
